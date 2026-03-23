@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Create Quiz</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: "Segoe UI", sans-serif;
+    background: linear-gradient(135deg, #0f172a, #1e293b);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 30px;
+}
+
+.card {
+    width: 650px;
+    background: rgba(255,255,255,0.06);
+    padding: 25px;
+    border-radius: 18px;
+    backdrop-filter: blur(10px);
+}
+
+h1 {
+    margin-bottom: 5px;
+}
+
+p {
+    color: #94a3b8;
+    margin-bottom: 20px;
+}
+
+.input {
+    width: 100%;
+    padding: 10px;
+    margin: 6px 0;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+}
+
+.btn {
+    padding: 10px 15px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.add { background: #22c55e; color: white; }
+.save { background: #3b82f6; color: white; margin-left: 10px; }
+.back { background: #ef4444; color: white; margin-left: 10px; }
+
+.question-box {
+    background: rgba(255,255,255,0.05);
+    padding: 15px;
+    border-radius: 12px;
+    margin-top: 15px;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.top-input {
+    margin-bottom: 15px;
+}
+</style>
+
+</head>
+<body>
+
+<div class="card">
+
+<h1>Create Quiz</h1>
+<p>Future: Add questions here</p>
+
+<!-- Quiz Title -->
+<input class="input top-input" id="quizTitle" type="text" placeholder="Quiz Title">
+
+<!-- Questions -->
+<div id="questions">
+
+    <div class="question-box">
+        <input class="input" placeholder="Question">
+        <input class="input" placeholder="Option A">
+        <input class="input" placeholder="Option B">
+        <input class="input" placeholder="Option C">
+        <input class="input" placeholder="Option D">
+        <input class="input" placeholder="Correct Answer">
+    </div>
+
+</div>
+
+<!-- Buttons -->
+<button class="btn add" onclick="addQuestion()">+ Add Question</button>
+<button class="btn save" onclick="saveQuiz()">✔ Save Quiz</button>
+<a href="/dashboard" class="btn back">Back</a>
+
+</div>
+
+<script>
+function addQuestion() {
+    const container = document.getElementById("questions");
+
+    const div = document.createElement("div");
+    div.className = "question-box";
+
+    div.innerHTML = `
+        <input class="input" placeholder="Question">
+        <input class="input" placeholder="Option A">
+        <input class="input" placeholder="Option B">
+        <input class="input" placeholder="Option C">
+        <input class="input" placeholder="Option D">
+        <input class="input" placeholder="Correct Answer">
+    `;
+
+    container.appendChild(div);
+}
+
+function saveQuiz() {
+    const title = document.getElementById("quizTitle").value;
+
+    const questions = [];
+
+    document.querySelectorAll(".question-box").forEach(box => {
+        const inputs = box.querySelectorAll("input");
+
+        questions.push({
+            question: inputs[0].value,
+            optionA: inputs[1].value,
+            optionB: inputs[2].value,
+            optionC: inputs[3].value,
+            optionD: inputs[4].value,
+            answer: inputs[5].value
+        });
+    });
+
+    console.log("QUIZ TITLE:", title);
+    console.log("QUESTIONS:", questions);
+
+    alert("Quiz saved (check console - backend not connected yet)");
+}
+</script>
+
+</body>
+</html>
